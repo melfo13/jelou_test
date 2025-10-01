@@ -87,6 +87,8 @@ jobs:
       if: github.event.inputs.action == 'apply' || (github.ref == 'refs/heads/main' && github.event_name == 'push')
       run: |
         terraform apply -auto-approve \
+          -var="db_password=${{ secrets.DB_PASSWORD }}" \
+          -var="public_key=${{ secrets.SSH_PUBLIC_KEY }}" \
           -var="environment=dev"
 
     - name: Terraform Destroy
