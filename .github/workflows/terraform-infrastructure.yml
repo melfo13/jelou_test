@@ -57,7 +57,7 @@ jobs:
     - name: Terraform Validate
       run: terraform validate
 
-     - name: Terraform Plan
+    - name: Terraform Plan
        if: github.event.inputs.action == 'plan' || github.event_name == 'pull_request'
        id: plan
        run: |
