@@ -1,30 +1,23 @@
 terraform {
   required_version = ">= 1.0"
-  
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
   }
-  
-  # Backend para almacenar el estado (opcional - comentar si no tienes S3)
-  # backend "s3" {
-  #   bucket = "tu-terraform-state-bucket"
-  #   key    = "user-microservice/terraform.tfstate"
-  #   region = "us-west-2"
-  # }
 }
 
 # Configurar el proveedor AWS
 provider "aws" {
   region = var.aws_region
-  
+
   default_tags {
     tags = {
-      Project     = "user-management-microservice"
-      ManagedBy   = "terraform"
-      Owner       = "devops-team"
+      Project   = "user-management-microservice"
+      ManagedBy = "terraform"
+      Owner     = "devops-team"
     }
   }
 }

@@ -32,7 +32,7 @@ variable "db_password" {
   description = "Password para la base de datos"
   type        = string
   sensitive   = true
-  
+
   validation {
     condition     = length(var.db_password) >= 8
     error_message = "La contraseña debe tener al menos 8 caracteres."
@@ -42,7 +42,7 @@ variable "db_password" {
 variable "public_key" {
   description = "Clave pública SSH para acceso a las instancias"
   type        = string
-  
+
   validation {
     condition     = can(regex("^ssh-", var.public_key))
     error_message = "La clave pública debe comenzar con ssh-rsa, ssh-ed25519, etc."
