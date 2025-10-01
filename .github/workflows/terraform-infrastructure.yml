@@ -58,12 +58,12 @@ jobs:
       run: terraform validate
 
     - name: Terraform Plan
-       if: github.event.inputs.action == 'plan' || github.event_name == 'pull_request'
-       id: plan
-       run: |
-         terraform plan -var="environment=dev" \
-                       -out=tfplan
-       continue-on-error: true
+      if: github.event.inputs.action == 'plan' || github.event_name == 'pull_request'
+      id: plan
+      run: |
+        terraform plan -var="environment=dev" \
+          -out=tfplan
+      continue-on-error: true
 
     - name: Comment PR with Plan
       if: github.event_name == 'pull_request'
@@ -84,16 +84,16 @@ jobs:
           })
 
     - name: Terraform Apply
-       if: github.event.inputs.action == 'apply' || (github.ref == 'refs/heads/main' && github.event_name == 'push')
-       run: |
-         terraform apply -auto-approve \
-           -var="environment=dev"
+      if: github.event.inputs.action == 'apply' || (github.ref == 'refs/heads/main' && github.event_name == 'push')
+      run: |
+        terraform apply -auto-approve \
+          -var="environment=dev"
 
     - name: Terraform Destroy
-       if: github.event.inputs.action == 'destroy'
-       run: |
-         terraform destroy -auto-approve \
-           -var="environment=dev"
+      if: github.event.inputs.action == 'destroy'
+      run: |
+        terraform destroy -auto-approve \
+          -var="environment=dev"
 
     - name: Get infrastructure outputs
       if: github.event.inputs.action == 'apply' || (github.ref == 'refs/heads/main' && github.event_name == 'push')
