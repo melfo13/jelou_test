@@ -97,11 +97,3 @@ jobs:
       if: github.event.inputs.action == 'destroy'
       run: |
         terraform destroy -auto-approve 
-
-    - name: Get infrastructure outputs
-      if: github.event.inputs.action == 'apply' || (github.ref == 'refs/heads/main' && github.event_name == 'push')
-      id: outputs
-      run: |
-        echo "instance_ip=$(terraform output -raw instance_public_ip)" >> $GITHUB_OUTPUT
-        echo "application_url=$(terraform output -raw application_url)" >> $GITHUB_OUTPUT
-        echo "ssh_command=$(terraform output -raw ssh_connection)" >> $GITHUB_OUTPUT
